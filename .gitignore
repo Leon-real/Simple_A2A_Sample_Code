@@ -12,9 +12,13 @@ Thumbs.db         # Windows
 # =============================
 # Python 관련
 # =============================
-__pycache__/      # Python bytecode
-*.py[cod]         # 컴파일된 파이썬 파일
+__pycache__/        # Python bytecode 디렉토리
+*.py[cod]           # 컴파일된 파이썬 파일 (*.pyc, *.pyo, *.pyd)
 *.pyo
+
+# pycache 내부 모든 파일 확실하게 무시
+**/__pycache__/
+**/*.pyc
 
 # 가상 환경
 venv/
