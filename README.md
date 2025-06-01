@@ -2,16 +2,47 @@
 
 > **참고:** [A2A 샘플 코드 참고 깃허브](https://github.com/theailanguage/a2a_samples)
 
-이 프로젝트는 A2A(Agent-to-Agent) 프로토콜을 활용하여 여러 에이전트가 서로 통신하고 협업하는 샘플 코드입니다.
+이 프로젝트는 **A2A(Agent-to-Agent) 프로토콜**을 활용하여, 여러 에이전트가 서로 통신하고 협업하는 구조를 구현한 샘플 코드입니다.
+
+---
 
 ## 🧑‍💻 에이전트 구성
 
-1. **TellTimeAgent** – 현재 시간을 알려주는 에이전트
-2. **RestaurantMenuAgent** – 식당 메뉴 정보를 제공하는 에이전트
-3. **WriteAgent** – 글을 작성해주는 에이전트
-4. **HostAgent (Orchestrator)** – 요청을 적절한 에이전트로 라우팅하는 오케스트레이터
+1. **TellTimeAgent** – 현재 시간을 알려주는 에이전트  
+2. **RestaurantMenuAgent** – 식당 메뉴 정보를 제공하는 에이전트  
+3. **WriteAgent** – 글을 작성해주는 에이전트  
+4. **HostAgent (Orchestrator)** – 요청을 적절한 에이전트로 라우팅하는 오케스트레이터  
 
-각 에이전트는 A2A Discovery 및 JSON-RPC를 통해 유기적으로 연결되어 동작합니다.
+> 각 에이전트는 **A2A Discovery**와 **JSON-RPC 통신**을 통해 유기적으로 연결되어 작동합니다.
+
+---
+
+## 📸 A2A 작동 결과
+
+### 🔹 사용 예시 1: 현재 시간 요청
+
+- **User Query**  
+  👉 “현재 시간은 몇시인가요?”
+
+- **동작 흐름**  
+  1. ⏱️ `TellTimeAgent`가 현재 시간 조회  
+  2. 🧠 `Orchestrator`가 응답을 받아 사용자에게 전달  
+
+![A2A 작동 예시 1](for_github_readme/images/results1.png)
+
+---
+
+### 🔹 사용 예시 2: 현재 시간에 맞는 음식 추천
+
+- **User Query**  
+  👉 “현재 시간에 먹을만한 음식 추천해줘.”
+
+- **동작 흐름**  
+  1. ⏱️ `TellTimeAgent`가 현재 시간 조회  
+  2. 🍽️ `RestaurantMenuAgent`가 메뉴 정보 제공  
+  3. 🧠 `Orchestrator`가 받은 정보를 기반으로 음식 추천  
+
+![A2A 작동 예시 2](for_github_readme/images/results2.png)
 
 ---
 
@@ -40,13 +71,13 @@ pip install -r requirements.txt
 ### 4. LLM API Key 설정
 프로젝트 루트에 `.env` 파일을 생성하고 아래와 같이 입력하세요.
 ```bash
-For Gemini
+# For Gemini
 GOOGLE_API_KEY=
 
-For OpenAI
+# For OpenAI
 OPENAI_API_KEY=
 
-For Local Ollama (localhost:11434)
+# For Local Ollama (localhost:11434)
 OLLAMA_API_BASE=http://localhost:11434
 ```
 
@@ -78,7 +109,6 @@ python3 -m app.cmd.cmd --agent http://localhost:10002
 ```bash
 .
 ├── README.md                    # 프로젝트 기본 설명서
-├── README_.md                   # 추가 설명서 또는 예전 버전 README
 
 ├── agents                       # 여러 에이전트(봇) 소스코드 모음
 │   ├── RestaurantMenu_agent     # 식당 메뉴 관련 에이전트
@@ -98,7 +128,7 @@ python3 -m app.cmd.cmd --agent http://localhost:10002
 │       ├── agent.py             # 글 작성 핵심 로직
 │       └── task_manager.py      # 작성 작업 스케줄링 담당
 
-├── app                          # 애플리케이션 커맨드 관련 코드
+├── app                          # 애플리케이션 커맨드 관련 코드(CLI 환경 테스트를 위해)
 │   └── cmd
 │       ├── __init__.py          # cmd 모듈 초기화 파일
 │       └── cmd.py               # 커맨드 실행 및 처리 로직
@@ -125,7 +155,7 @@ python3 -m app.cmd.cmd --agent http://localhost:10002
 # ──────────────────────────────────────────────
 # 단일 파일 모음 (루트 디렉터리에 위치)
 # ──────────────────────────────────────────────
-├── decode_log.py               # 로그 디코딩 및 분석용 스크립트
+├── decode_log.py               # 로그 디코딩 및 분석용 스크립트(한국어 디코딩용)
 └── requirements.txt            # 파이썬 패키지 의존성 목록
 
 ```
